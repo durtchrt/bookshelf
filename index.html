@@ -37,6 +37,8 @@ class: center, middle
 1. Prepared
 1. Example 1 - Ping Pong
 1. Example 2 - Hierachy
+1. Example 3 - Let it crash
+
 
 ---
 # What is Akka
@@ -114,7 +116,7 @@ thread를 직접 핸들링하는 것보다 thread를 더 추상화한 actor를 �
 
 #### reative in java
 - [Reactive Streams](http://www.reactive-streams.org/) : JDK 9 
-- [reactive streams 1.0 설명](http://www.reactive-streams.org/announce-1.0.0)
+- [reactive streams 1.0 - Implementations 참조](http://www.reactive-streams.org/announce-1.0.0)
 
 ---
 
@@ -198,12 +200,12 @@ Thread나 Task를 만들어서 ExecutorService에게 제출하는 식으로 동�
 
 # Example 2 - Hierachy
 
-### Goal 
+#### Goal 
 - Actor를 계층구조로 생성한다.
 - 부모 자식간의 관계를 이해한
 
 
-- 프로그램의 기대동작 
+#### 프로그램의 기대동작 
  1. PingActor를 생성하고 "work" 메세지를 보낸다. (sender = null)
  1. PingActor는 "work" 메세지를 받고 Ping1Actor에게 "work" 메세지를 전달한다. (sender = PingActor)
  1. Ping1Actor는 "work" 메세지를 받고 Ping2Actor, Ping3Actor에게 "work" 메세지를 전달한다. (sender = PingActor)
@@ -218,7 +220,22 @@ Thread나 Task를 만들어서 ExecutorService에게 제출하는 식으로 동�
 
 ---
 
+# Example 3 - Let it crash
 
+#### Goal 
+- Supervisor의 역할을 이해한다.
+- Supervisor의 OneToOne, OneToMany 정책을 이해한다.
+- Supervisor가 오류가 난 Actor를 다루는 정책 resume, restart, stop, escalate를 이해한다.
+
+#### 프로그램의 기대동작 
+  1. PingActor에 "bad" 메시지를 전달 
+  1. "bad" 메세지를 받은 PingActor는 Ping1Actor에게 "bad" 메세지를 전달
+  1. Ping1Actor는 "bad" 메세지를 Ping2Actor, Ping3ACtor에게 "bad" 메세지 전달
+  1. Ping2Actor, Ping3Actor는 "bad" 메세지를 받고 각각 ArithmeticException, NullPointerException을 던짐.
+  1. Ping1Actor는 Ping2Actor, Ping3Actor로 부터 받은 예외 처리 Ping2Actor는 resume, Ping3Actor는 restart
+
+  [BadMain.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/BadMain.java) , [PingActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/PingActor.java), [Ping1Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/Ping1Actor.java), [Ping2Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/Ping2Actor.java), [Ping3Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/PingActor3.java)
+---
     </textarea>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/remark/0.14.0/remark.min.js"></script>
