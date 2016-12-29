@@ -50,11 +50,12 @@ class: center, middle
 - Location Transparency
 - Persistence
 
-#### 아카의 패러다임
+#### 아카(액터)의 패러다임 (참조 - 아카시작하기 : 임백준 )  
 - message driven : 객체의 메서드를 직접 호출할 수 없고, 오직 메세지를 전달할 수 있을 뿐이다.
 - asynchronous : 모든것이 비동기적이다.
 - nonblocking : 블록킹이 일어나면 안된다.
 - concurrency : 모든것이 동시적이다.
+- 상태를 공유하지 않는다. 불변객체
 
 ---
 # Actor - 1/3
@@ -100,17 +101,20 @@ thread를 직접 핸들링하는 것보다 thread를 더 추상화한 actor를 �
 - 메시지를 송신한다
 - 다른 액터를 만든다
 
-
-
 ---
 # Reatvie manifesto
 
 [링크](http://www.reactivemanifesto.org/)
 
+#### 리액티브 선언  
 - Responsive : 반응성 (자극에 즉각적인 반응)
 - Resilient : 유연성 (fault-tolerant)
 - Elastic : 탄력성 (scalability)
 - Message Driven : 메세지 중심 (asynchronous, location transparency)
+
+#### reative in java
+- [Reactive Streams](http://www.reactive-streams.org/) : JDK 9 
+- [reactive streams 1.0 설명](http://www.reactive-streams.org/announce-1.0.0)
 
 ---
 
