@@ -3,7 +3,6 @@
   <head>
     <title>Akka Presentation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
@@ -235,6 +234,38 @@ Thread나 Task를 만들어서 ExecutorService에게 제출하는 식으로 동�
   1. Ping1Actor는 Ping2Actor, Ping3Actor로 부터 받은 예외 처리 Ping2Actor는 resume, Ping3Actor는 restart
 
   [BadMain.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/BadMain.java) , [PingActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/PingActor.java), [Ping1Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/Ping1Actor.java), [Ping2Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/Ping2Actor.java), [Ping3Actor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka03/src/main/java/akka/actor/PingActor3.java)
+---
+
+# Example 4 - Router
+
+#### Goal 
+- Router를 이해한다.
+- Routing 정책을 이해한다.
+
+#### 프로그램의 기대동작 
+ 1. PingActor에 "start" 메세지를 전달한다.
+ 1. PingActor는 RoundRobinPool을 이용하여 Ping1Actor들에 0 ~ 9 값을 순차적으로 전달한. pool은 5개이므로 0~4, 5~9로 두번 나뉘어서 전달된다.
+ 1. Ping1Actor는 1 ~ 10의 값을 메세지와 함께 출력한다.
+
+ [Main.java](https://github.daumkakao.com/top/study/blob/master/akka/akka04/src/main/java/akka/Main.java), [PingActor](https://github.daumkakao.com/top/study/blob/master/akka/akka04/src/main/java/akka/actor/PingActor.java), [Ping1Actor](https://github.daumkakao.com/top/study/blob/master/akka/akka04/src/main/java/akka/actor/Ping1Actor.java)
+
+---
+
+# Example 5 - Blocking/Nonblocking
+
+#### Goal 
+- child actor가 전달하는 값(메세지)를 블로킹 방식으로 받는다.
+- child actor가 전달하는 값(메세지)를 넌블로킹 방식으로 받는다.
+
+#### 프로그램의 기대동작 
+- ...
+
+[BlockingMain.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/BlockingMain.java), [BlockingActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/actor/BlockingActor.java), [CalculationActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/actor/CalculationActor.java)
+
+
+[NonblockingMain.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/NonblockingMain.java), [BlockingActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/actor/NonblockingActor.java), [CalculationActor.java](https://github.daumkakao.com/top/study/blob/master/akka/akka05/src/main/java/akka/actor/CalculationActor.java)
+
+
 ---
     </textarea>
 
